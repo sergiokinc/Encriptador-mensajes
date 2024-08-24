@@ -28,25 +28,14 @@ function copyToClipboard() {
     alert("Texto copiado al portapapeles");
 }
 
-// Función para manejar la visibilidad de la imagen de marcador de posición
-function togglePlaceholderImage() {
-    const placeholderImage = document.getElementById("placeholder-image");
-    const outputText = document.getElementById("output-text").value;
-
-    if (outputText === "") {
-        placeholderImage.style.display = "block"; // Mostrar imagen
-    } else {
-        placeholderImage.style.display = "none"; // Ocultar imagen
-    }
-}
-
 // Asignar funciones a los botones
 document.getElementById("encrypt-btn").addEventListener("click", function() {
     const inputText = document.getElementById("input-text").value;
     const encryptedText = encryptText(inputText);
     document.getElementById("output-text").value = encryptedText;
 
-    togglePlaceholderImage(); // Llamar a la función para mostrar/ocultar imagen
+    // Ocultar la imagen de marcador de posición
+    document.getElementById("placeholder-image").style.display = "none";
 });
 
 document.getElementById("decrypt-btn").addEventListener("click", function() {
@@ -54,10 +43,18 @@ document.getElementById("decrypt-btn").addEventListener("click", function() {
     const decryptedText = decryptText(inputText);
     document.getElementById("output-text").value = decryptedText;
 
-    togglePlaceholderImage(); // Llamar a la función para mostrar/ocultar imagen
+    // Ocultar la imagen de marcador de posición
+    document.getElementById("placeholder-image").style.display = "none";
 });
 
-// Mostrar imagen de marcador de posición al cargar la página si el campo de texto de salida está vacío
-window.onload = togglePlaceholderImage;
+// Mostrar la imagen de marcador de posición si el textarea está vacío
+document.getElementById("input-text").addEventListener("input", function() {
+    const inputText = this.value;
+    const placeholderImage = document.getElementById("placeholder-image");
+    if (inputText === "") {
+        placeholderImage.style.display = "block"; // Mostrar imagen
+    } else {
+        placeholderImage.style.display = "none"; // Ocultar imagen
+    }
+});
 
-document.getElementById("copy-btn").addEventListener("click", copyToClipboard);
