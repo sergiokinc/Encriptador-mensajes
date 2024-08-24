@@ -34,6 +34,7 @@ h1 {
 .columns {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap; /* Permite que las columnas se envuelvan */
 }
 
 /* Columnas */
@@ -72,11 +73,12 @@ textarea {
 /* Imagen de marcador de posición dentro del textarea */
 #placeholder-image {
     position: absolute;
-    top: 62%;
+    top: 50%; /* Centrar verticalmente */
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
-    opacity: 4.5;
+    width: 80%; /* Ajusta el tamaño de la imagen */
+    opacity: 0.5; /* Ajusta la opacidad */
+    pointer-events: none; /* Asegura que la imagen no interfiera con los clics */
 }
 
 /* Botones */
@@ -145,28 +147,35 @@ footer {
 
 /* Para tablets (pantallas entre 600px y 1024px) */
 @media (min-width: 600px) and (max-width: 1024px) {
-    .container {
-        max-width: 600px;
-        padding: 25px;
+    .columns {
+        flex-direction: column; /* Cambiar a columnas apiladas */
     }
 
-    h1 {
-        font-size: 28px;
+    .input-column {
+        flex: none; /* Ancho automático */
+        margin-bottom: 20px; /* Espacio entre columnas */
     }
 
-    textarea {
-        height: 120px;
-        font-size: 18px;
-    }
-
-    button {
-        font-size: 18px;
-        padding: 12px;
+    .output-column {
+        flex: none; /* Ancho automático */
     }
 }
 
 /* Para dispositivos móviles (pantallas de menos de 600px) */
 @media (max-width: 600px) {
+    .columns {
+        flex-direction: column; /* Cambiar a columnas apiladas */
+    }
+
+    .input-column {
+        flex: none; /* Ancho automático */
+        margin-bottom: 20px; /* Espacio entre columnas */
+    }
+
+    .output-column {
+        flex: none; /* Ancho automático */
+    }
+
     .container {
         padding: 15px;
         max-width: 90%;
